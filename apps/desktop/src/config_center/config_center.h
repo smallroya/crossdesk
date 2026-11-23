@@ -133,9 +133,9 @@ class ConfigCenter {
   static constexpr bool kDefaultDisableReceiverPaddingProbing = true;
   bool disable_receiver_padding_probing_ = kDefaultDisableReceiverPaddingProbing;
   std::string signal_server_host_ = "";
-  std::string signal_server_host_default_ = "api.crossdesk.cn";
+  std::string signal_server_host_default_ = "af83f026b9651d38b.app.workbuddy.host/?sharecode=Z2JOCTQELN";
   int signal_server_port_ = 0;
-  int server_port_default_ = 9099;
+  int server_port_default_ = 443;
   bool enable_self_hosted_ = false;
   bool enable_autostart_ = false;
   bool enable_daemon_ = false;
