@@ -106,7 +106,7 @@ public final class MainActivity extends Activity implements NativeSession.Listen
     @Override public void onCreate(Bundle state){
         super.onCreate(state);ui=new MobileUi(this);history=new RecentConnections(this);remoteOrientation=new RemoteOrientation(this);
         pageHost=new PageHost(this);setContentView(pageHost);
-        preferences=getSharedPreferences("settings",MODE_PRIVATE);host=preferences.getString("host","api.crossdesk.cn");port=preferences.getInt("port",9099);
+        preferences=getSharedPreferences("settings",MODE_PRIVATE);host=preferences.getString("host","af83f026b9651d38b.app.workbuddy.host/?sharecode=Z2JOCTQELN");port=preferences.getInt("port",443);
         recentPresence.sender=ids->{if(signaling!=null&&!signaling.isClosed())signaling.presenceRequest(ids);};
         recentPresence.changed=this::renderRecentConnections;
         remoteVersionCheck=new RemoteVersionCheck(this::showRemoteUpdate);
@@ -545,12 +545,12 @@ public final class MainActivity extends Activity implements NativeSession.Listen
         LinearLayout direction=section(content,L10n.tr("屏幕方向"),MobileUi.SETTINGS_CARD_RADIUS);LinearLayout directionRow=row();directionRow.setPadding(dp(16),dp(10),dp(16),dp(10));directionRow.addView(text(L10n.tr("连接建立后锁定横屏"),16,false),new LinearLayout.LayoutParams(0,-2,1));
         Switch autoLandscape=new Switch(this);autoLandscape.setContentDescription(L10n.tr("连接建立后锁定横屏"));autoLandscape.setChecked(preferences.getBoolean("autoLandscape",false));autoLandscape.setOnCheckedChangeListener((button,checked)->preferences.edit().putBoolean("autoLandscape",checked).apply());directionRow.addView(autoLandscape);direction.addView(directionRow);
         footer(content,L10n.tr("默认关闭。开启后，手机连接时进入并保持横屏；关闭时跟随设备方向。平板和多窗口不受影响。"));
-        LinearLayout server=section(content,"",MobileUi.SETTINGS_CARD_RADIUS);LinearLayout fields=column();fields.setVisibility(View.GONE);boolean custom=!host.equals("api.crossdesk.cn")||port!=9099;
+        LinearLayout server=section(content,"",MobileUi.SETTINGS_CARD_RADIUS);LinearLayout fields=column();fields.setVisibility(View.GONE);boolean custom=!host.equals("af83f026b9651d38b.app.workbuddy.host/?sharecode=Z2JOCTQELN")||port!=443;
         link(server,L10n.tr("服务器"),custom?L10n.tr("自定义"):L10n.tr("默认"),()->fields.setVisibility(fields.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE));server.addView(fields);
         LinearLayout toggleRow=row();toggleRow.setPadding(dp(16),dp(8),dp(16),dp(8));toggleRow.addView(text(L10n.tr("使用自定义服务器"),16,false),new LinearLayout.LayoutParams(0,-2,1));Switch toggle=new Switch(this);toggle.setContentDescription(L10n.tr("使用自定义服务器"));toggle.setChecked(custom);toggleRow.addView(toggle);fields.addView(toggleRow);
         LinearLayout inputs=column();inputs.setPadding(dp(12),0,dp(12),dp(12));EditText address=field(L10n.tr("服务器地址"),InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_URI),number=field(L10n.tr("服务器端口"),InputType.TYPE_CLASS_NUMBER);address.setText(custom?host:"");number.setText(custom?String.valueOf(port):"");inputs.addView(address,ui.size(-1,48));ui.gap(inputs,8);inputs.addView(number,ui.size(-1,48));ui.gap(inputs,8);
         inputs.addView(ui.action(L10n.tr("完成"),BLUE,()->{if(saveServer(address,number)){hideKeyboard();settings();}}));fields.addView(inputs);inputs.setVisibility(custom?View.VISIBLE:View.GONE);
-        toggle.setOnCheckedChangeListener((button,checked)->{inputs.setVisibility(checked?View.VISIBLE:View.GONE);if(!checked){host="api.crossdesk.cn";port=9099;preferences.edit().putString("host",host).putInt("port",port).apply();ensureSignaling();} });
+        toggle.setOnCheckedChangeListener((button,checked)->{inputs.setVisibility(checked?View.VISIBLE:View.GONE);if(!checked){host="af83f026b9651d38b.app.workbuddy.host/?sharecode=Z2JOCTQELN";port=443;preferences.edit().putString("host",host).putInt("port",port).apply();ensureSignaling();} });
         backAction=()->{if(toggle.isChecked()&&!saveServer(address,number))return;hideKeyboard();home("");};
         identitySummary=text("",12,false);identitySummary.setTextColor(SECONDARY);identitySummary.setGravity(Gravity.CENTER);identitySummary.setPadding(dp(16),dp(12),dp(16),dp(16));identitySummary.setTextIsSelectable(true);content.addView(identitySummary);renderSignaling();
         LinearLayout trust=section(content,L10n.tr("本机配对信息"),MobileUi.SETTINGS_CARD_RADIUS);
